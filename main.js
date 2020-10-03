@@ -15,8 +15,9 @@ function createWindow() {
     // Comment in to disable menu
     // Menu.setApplicationMenu(null);
 
-    // and load the index.html of the app.
-    win.loadFile('index.html');
+    // check which page should be loaded
+    // 
+    win.loadFile('startup.html');
 };
 
 // This method will be called when Electron has finished
@@ -61,5 +62,8 @@ ipcMain.on('open-folder-dialog', (event) => {
 });
 
 ipcMain.on('continue-from-settings', (event) => {
+    // save settings
+
+    // go to new page
     win.loadFile('mattjek.html');
 });
