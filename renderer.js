@@ -2,6 +2,7 @@ const { ipcRenderer } = require('electron');
 
 const selectFileBtn = document.getElementById('select-file');
 const selectFolderBtn = document.getElementById('select-folder');
+const continueBtn = document.getElementById('continue-button');
 
 selectFileBtn.addEventListener('click', (event) => {
     ipcRenderer.send('open-file-dialog');
@@ -19,4 +20,8 @@ ipcRenderer.on('selected-file', (event, path) => {
 ipcRenderer.on('selected-folder', (event, path) => {
     console.log(path);
     document.getElementById('input-folder').value = path;
+});
+
+continueBtn.addEventListener('click', (event) => {
+    ipcRenderer.send('continue-from-settings');
 });

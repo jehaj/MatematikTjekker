@@ -1,8 +1,10 @@
 const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 
+let win;
+
 function createWindow() {
     // Create the browser window.
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 700,
         height: 550,
         webPreferences: {
@@ -48,7 +50,7 @@ ipcMain.on('open-file-dialog', (event) => {
     }).then((value) => {
         event.sender.send('selected-file', value.filePaths[0]);
     });
-})
+});
 
 ipcMain.on('open-folder-dialog', (event) => {
     dialog.showOpenDialog({
@@ -56,4 +58,8 @@ ipcMain.on('open-folder-dialog', (event) => {
     }).then((value) => {
         event.sender.send('selected-folder', value.filePaths[0]);
     });
-})
+});
+
+ipcMain.on('continue-from-settings', (event) => {
+    win.loadFile('mattjek.html');
+});

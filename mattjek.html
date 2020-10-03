@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-light navbar-expand bg-light">
+    <a class="navbar-brand mr-auto" href="#">MatematikTjekker</a>
+    <div class="navbar-nav">
+      <a class="nav-link active" href="#">Forside</a>
+      <a class="nav-link" href="#">Indstillinger</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row mt-5">
+      <h1 class="display-4">
+        Velkommen til <span id="name-holder-title">{navn}</span>! 🥳
+      </h1>
+    </div>
+  </div>
+
+  <nav class="navbar fixed-bottom navbar-light justify-content-center" style="background-color: #ffffff;">
+    <a class="navbar-brand display-1 mx-0">Lavet af <strong>Nikolaj</strong></a>
+  </nav>
+
+  <script>
+    window.jQuery = window.$ = require('jquery');
+  </script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="renderer.js"></script>
+</body>
+
+</html>
