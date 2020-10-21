@@ -9,10 +9,10 @@
   "author": "Nikolaj Jehøj-Krogager",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^10.1.2"
+    "electron": "^10.1.4"
   },
   "dependencies": {
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^4.5.3",
     "jquery": "^3.5.1"
   }
 }
