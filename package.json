@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "repository": {
+    "url": "https://github.com/NikolajK-HTX/MatematikTjekker"
+  },
   "scripts": {
     "start": "electron ."
   },
@@ -13,6 +16,8 @@
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
-    "jquery": "^3.5.1"
+    "electron-store": "^6.0.1",
+    "jquery": "^3.5.1",
+    "read-excel-file": "^4.0.7"
   }
 }

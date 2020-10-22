@@ -23,5 +23,7 @@ ipcRenderer.on('selected-folder', (event, path) => {
 });
 
 continueBtn.addEventListener('click', (event) => {
-    ipcRenderer.send('continue-from-settings');
+    let selectFileText = document.getElementById('input-file').value;
+    let selectFolderText = document.getElementById('input-folder').value;
+    ipcRenderer.send('continue-from-settings', [selectFileText, selectFolderText]);
 });

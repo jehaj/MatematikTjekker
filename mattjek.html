@@ -17,15 +17,29 @@
     <a class="navbar-brand mr-auto" href="#">MatematikTjekker</a>
     <div class="navbar-nav">
       <a class="nav-link active" href="#">Forside</a>
-      <a class="nav-link" href="#">Indstillinger</a>
+      <a class="nav-link" href="#" onclick="loadSettingsPage()">Indstillinger</a>
     </div>
   </nav>
 
   <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-3">
       <h2>
         Velkommen til <span id="name-holder-title">{navn}</span>! 🥳
       </h2>
+    </div>
+
+    <div class="row mt-2" style="height: 50vh; overflow-y:auto; overflow-x: hidden;" >
+      <div class="col p-0" id="content-holder">
+        <div class="alert alert-info mt-5 p-5">
+          <p>Tryk på 'Tjek opgaver!' for at se hvilke opgaver du mangler at lave i matematik.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row justify-content-center mt-2">
+      <button type="button" class="btn btn-primary btn-lg" id="tjek-button" style="width: 200px">Tjek opgaver!</button>
     </div>
   </div>
 
@@ -38,7 +52,7 @@
   </script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="renderer.js"></script>
+  <script src="mattjek.js"></script>
 </body>
 
 </html>

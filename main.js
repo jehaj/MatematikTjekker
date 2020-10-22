@@ -1,4 +1,9 @@
 const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
+const Store = require('electron-store');
+const store = new Store();
+const xlsxFile = require('read-excel-file/node');
+const fs = require('fs');
+const path = require('path')
 
 let win;
 
@@ -13,11 +18,14 @@ function createWindow() {
     });
 
     // Comment in to disable menu
-    // Menu.setApplicationMenu(null);
+    Menu.setApplicationMenu(null);
 
     // check which page should be loaded
     // 
-    win.loadFile('startup.html');
+    if (store.get('filePath').length < 1 || store.get('folderPath').length < 1) {
+        win.loadFile('startup.html');
+
+    } else { win.loadFile('mattjek.html'); }
 };
 
 // This method will be called when Electron has finished
@@ -47,7 +55,7 @@ app.on('activate', () => {
 ipcMain.on('open-file-dialog', (event) => {
     dialog.showOpenDialog({
         properties: ['openFile'],
-        filters: [ { name: 'Excel', extensions: ['xlsx'] } ]
+        filters: [{ name: 'Excel', extensions: ['xlsx'] }]
     }).then((value) => {
         event.sender.send('selected-file', value.filePaths[0]);
     });
@@ -61,9 +69,96 @@ ipcMain.on('open-folder-dialog', (event) => {
     });
 });
 
-ipcMain.on('continue-from-settings', (event) => {
+ipcMain.on('continue-from-settings', (event, data) => {
     // save settings
+    store.set('filePath', data[0]);
+    store.set('folderPath', data[1]);
 
     // go to new page
     win.loadFile('mattjek.html');
+});
+
+ipcMain.on('get-username', (event) => {
+    let name = store.get('folderPath').substring(47);
+    event.sender.send('username', name);
+});
+
+ipcMain.on('get-homework', (event) => {
+    xlsxFile(store.get('filePath')).then((rows) => {
+        // Get homework from excel file
+        let exercisesFromFile = {};
+
+        rows.forEach(row => {
+            let exercisesFromRow = [];
+
+            let exerciseString = row[1].split(',');
+
+            exerciseString.forEach(element => {
+                let exercise = element.split('-');
+                if (exercise.length > 1) {
+                    let range = rangeFromAndTo(parseInt(exercise[0], 10), parseInt(exercise[1], 10));
+                    for (let n of range) {
+                        exercisesFromRow.push(n);
+                    }
+                } else {
+                    exercisesFromRow.push(parseInt(exercise, 10));
+                }
+            });
+
+            exercisesFromFile[row[0]] = exercisesFromRow;
+        });
+
+        // Get homework in folder
+        const directories = fs.readdirSync(store.get('folderPath'), { withFileTypes: true })
+            .filter(dirent => dirent.isDirectory())
+            .map(dirent => dirent.name);
+
+        let exercisesYouHaveDone = {};
+
+        for (let directory of directories) {
+            if (exercisesFromFile[directory] != null) {
+                const files = fs.readdirSync(path.join(store.get('folderPath'), directory), { withFileTypes: true })
+                    .filter(dirent => dirent.isFile())
+                    .map(dirent => dirent.name);
+
+                let newFiles = [];
+                for (let file of files) {
+                    file = parseInt(file.substring(0, 4), 10);
+                    newFiles.push(file);
+                }
+
+                exercisesYouHaveDone[directory] = newFiles;
+            }
+        }
+
+        // Compare the two
+        let missingExercises = {};
+
+        for (let nDirectory of Object.keys(exercisesFromFile)) {
+            let directory = exercisesFromFile[nDirectory];
+            for (let exercise of directory) {
+                if (!exercisesYouHaveDone[nDirectory].includes(exercise)) {
+                    if (missingExercises[nDirectory] == null) {
+                        missingExercises[nDirectory] = [];
+                    }
+                    missingExercises[nDirectory].push(exercise);
+                }
+            }
+        }
+
+        event.sender.send('homework', missingExercises);
+
+    });
+});
+
+function rangeFromAndTo(from, to) {
+    let range = [];
+    for (let index = from; index < to + 1; index++) {
+        range.push(index);
+    }
+    return range;
+}
+
+ipcMain.on('load-settings-page', (event) => {
+    win.loadFile('startup.html');
 });
