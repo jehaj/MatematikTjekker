@@ -22,7 +22,7 @@ function createWindow() {
 
     // check which page should be loaded
     // 
-    if (store.get('filePath').length < 1 || store.get('folderPath').length < 1) {
+    if (store.get('filePath') == null || store.get('folderPath') == null) {
         win.loadFile('startup.html');
 
     } else { win.loadFile('mattjek.html'); }
