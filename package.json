@@ -7,17 +7,23 @@
     "url": "https://github.com/NikolajK-HTX/MatematikTjekker"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "author": "Nikolaj Jehøj-Krogager",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^10.1.4"
+    "electron": "^10.1.4",
+    "electron-builder": "^22.9.1"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
     "electron-store": "^6.0.1",
     "jquery": "^3.5.1",
     "read-excel-file": "^4.0.7"
+  },
+  "build": {
+    "appId": "com.matematiktjekker"
   }
 }
