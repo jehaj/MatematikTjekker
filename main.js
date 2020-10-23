@@ -137,7 +137,7 @@ ipcMain.on('get-homework', (event) => {
         for (let nDirectory of Object.keys(exercisesFromFile)) {
             let directory = exercisesFromFile[nDirectory];
             for (let exercise of directory) {
-                if (!exercisesYouHaveDone[nDirectory].includes(exercise)) {
+                if (exercisesYouHaveDone[nDirectory] == null || !exercisesYouHaveDone[nDirectory].includes(exercise)) {
                     if (missingExercises[nDirectory] == null) {
                         missingExercises[nDirectory] = [];
                     }

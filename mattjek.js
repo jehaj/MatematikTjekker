@@ -25,6 +25,11 @@ ipcRenderer.on('homework', (event, data) => {
     } else {
         contentHolder.innerHTML = `<p>Du mangler følgende matematik opgaver:</p>`
         for (let nChapter of Object.keys(data)) {
+            stringExercises = "";
+            for (let exercise of data[nChapter]) {
+                stringExercises += exercise + ', ';
+            }
+            
             contentHolder.innerHTML += `
             <div class="row my-2">
             <div class="col">
@@ -36,7 +41,7 @@ ipcRenderer.on('homework', (event, data) => {
                     </div>
                     </div>
                     <div class="col-7">
-                    ${data[nChapter]}
+                    ${stringExercises}
                     </div>
                 </div>
                 </div>
