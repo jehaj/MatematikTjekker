@@ -79,7 +79,7 @@ ipcMain.on('continue-from-settings', (event, data) => {
 });
 
 ipcMain.on('get-username', (event) => {
-    let name = store.get('folderPath').substring(47);
+    let name = path.basename(store.get('folderPath')).substring(20);
     event.sender.send('username', name);
 });
 
