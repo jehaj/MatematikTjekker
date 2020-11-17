@@ -17,5 +17,6 @@ cd MatematikTjekker
 npm install
 yarn dist
 ```
+Hvis det køres på Windows vil der være oprettet en ny mappe med navnet 'dist' som indeholder en .exe, der vil installere på programmet.
 ## Fejl eller andre problemer
 Venligst opret en issue [her](https://github.com/NikolajK-HTX/MatematikTjekker/issues)
