@@ -10,6 +10,7 @@ tjekBtn.addEventListener('click', (event) => {
 })
 
 ipcRenderer.on('homework', (event, data) => {
+    let amountOfMHW = 0
     let contentHolder = document.getElementById('content-holder');
     if (isEmptyObject(data)) {
         contentHolder.innerHTML = `
@@ -23,11 +24,12 @@ ipcRenderer.on('homework', (event, data) => {
        </div>
          `;
     } else {
-        contentHolder.innerHTML = `<p>Du mangler følgende matematik opgaver:</p>`
+        contentHolder.innerHTML = `<p>Du mangler <span style="font-weight: bold;" id="amount-missing-homework"></span> matematik opgaver:</p>`
         for (let nChapter of Object.keys(data)) {
             stringExercises = "";
             for (let exercise of data[nChapter]) {
                 stringExercises += exercise + ', ';
+                amountOfMHW += 1;
             }
             
             contentHolder.innerHTML += `
@@ -48,6 +50,7 @@ ipcRenderer.on('homework', (event, data) => {
             </div>
             </div>`;
         }
+        document.getElementById('amount-missing-homework').innerHTML = amountOfMHW;
     }
 });
 
