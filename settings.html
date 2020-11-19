@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>MatematikTjekker</title>
+  <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-light navbar-expand bg-light">
+    <a class="navbar-brand mr-auto" href="#">MatematikTjekker</a>
+    <div class="navbar-nav">
+      <a class="nav-link" href="#" onclick="loadMathPage()">Forside</a>
+      <a class="nav-link active" href="#">Indstillinger</a>
+    </div>
+  </nav>
+
+
+  <div class="container" style="overflow-y: auto;">
+    <div class="row mt-5">
+      <h1 class="display-4">
+        Indstillinger ⚙
+      </h1>
+    </div>
+    <div class="row">
+      <p>
+        Kom du til at vælge den forkerte fil eller mappe? Bare rolig, det kan ændres - samt mere.
+      </p>
+    </div>
+    <div class="row">
+      <div class="input-group">
+        <input type="text" class="form-control" id="input-file"
+          placeholder="Vælg excel-arket, som indeholder opgaverne...">
+        <div class="input-group-append">
+          <button type="button" id="select-file" class="btn btn-primary">Vælg</button>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="input-group">
+        <input type="text" class="form-control" id="input-folder"
+          placeholder="Vælg mappen, hvori dine opgaver placeres...">
+        <div class="input-group-append">
+          <button type="button" id="select-folder" class="btn btn-success">Vælg</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-5 justify-content-center">
+      <button type="button" id="save-button" class="btn btn-lg btn-info">Gem</button>
+    </div>
+  </div>
+
+  <nav class="navbar fixed-bottom navbar-light justify-content-center" style="background-color: #ffffff; position: absolute;">
+    <a class="navbar-brand display-4 mx-0">Lavet af <strong>Nikolaj</strong></a>
+  </nav>
+
+  <script>
+    window.jQuery = window.$ = require('jquery');
+  </script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="settings.js"></script>
+</body>
+
+</html>

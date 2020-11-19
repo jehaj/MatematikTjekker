@@ -2,7 +2,7 @@ const { ipcRenderer } = require('electron');
 
 const selectFileBtn = document.getElementById('select-file');
 const selectFolderBtn = document.getElementById('select-folder');
-const continueBtn = document.getElementById('continue-button');
+const saveBtn = document.getElementById('save-button');
 
 selectFileBtn.addEventListener('click', (event) => {
     ipcRenderer.send('open-file-dialog');
@@ -22,8 +22,12 @@ ipcRenderer.on('selected-folder', (event, path) => {
     document.getElementById('input-folder').value = path;
 });
 
-continueBtn.addEventListener('click', (event) => {
+saveBtn.addEventListener('click', (event) => {
     let selectFileText = document.getElementById('input-file').value;
     let selectFolderText = document.getElementById('input-folder').value;
-    ipcRenderer.send('continue-from-startup', [selectFileText, selectFolderText]);
+    ipcRenderer.send('continue-from-settings', [selectFileText, selectFolderText]);
 });
+
+function loadMathPage() {
+    ipcRenderer.send('load-math-page');
+}

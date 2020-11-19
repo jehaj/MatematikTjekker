@@ -12,13 +12,15 @@ function createWindow() {
     win = new BrowserWindow({
         width: 700,
         height: 550,
+        minWidth: 700,
+        minHeight: 550,
         webPreferences: {
             nodeIntegration: true
         }
     });
 
     // Comment in to disable menu
-    Menu.setApplicationMenu(null);
+    // Menu.setApplicationMenu(null);
 
     // check which page should be loaded
     // 
@@ -69,12 +71,21 @@ ipcMain.on('open-folder-dialog', (event) => {
     });
 });
 
-ipcMain.on('continue-from-settings', (event, data) => {
+ipcMain.on('continue-from-startup', (event, data) => {
     // save settings
     store.set('filePath', data[0]);
     store.set('folderPath', data[1]);
 
     // go to new page
+    win.loadFile('mattjek.html');
+});
+
+ipcMain.on('continue-from-settings', (event, data) => {
+    // save settings
+    store.set('filePath', data[0]);
+    store.set('folderPath', data[1]);
+
+    // go to math check page
     win.loadFile('mattjek.html');
 });
 
@@ -160,5 +171,9 @@ function rangeFromAndTo(from, to) {
 }
 
 ipcMain.on('load-settings-page', (event) => {
-    win.loadFile('startup.html');
+    win.loadFile('settings.html');
+});
+
+ipcMain.on('load-math-page', (event) => {
+    win.loadFile('mattjek.html');
 });
