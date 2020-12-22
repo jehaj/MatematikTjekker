@@ -8,10 +8,11 @@
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="darkmode.css">
 
 </head>
 
-<body>
+<body id="darkcontroller">
   <nav class="navbar navbar-light navbar-expand bg-light">
     <a class="navbar-brand mr-auto" href="#">MatematikTjekker</a>
     <div class="navbar-nav">
@@ -41,6 +42,7 @@
         </div>
       </div>
     </div>
+
     <div class="row mt-3">
       <div class="input-group">
         <input type="text" class="form-control" id="input-folder"
@@ -51,12 +53,34 @@
       </div>
     </div>
 
+    <div class="row mt-3">
+      <div class="col-8">
+        <p>Vælg hvilket tema programmet skal have</p>
+      </div>
+      <div class="col-4">
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Mørk tilstand</a>
+            <a class="dropdown-item" href="#">Lys tilstand</a>
+            <a class="dropdown-item" href="#">Følg systemet</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
     <div class="row my-5 justify-content-center">
       <button type="button" id="save-button" class="btn btn-lg btn-info">Gem</button>
     </div>
   </div>
 
-  <nav class="navbar fixed-bottom navbar-light justify-content-center" style="background-color: #ffffff; position: absolute;">
+  <nav class="navbar fixed-bottom navbar-light justify-content-center"
+    style="background-color: #ffffff; position: absolute;">
     <a class="navbar-brand display-4 mx-0">Lavet af <strong>Nikolaj</strong></a>
   </nav>
 

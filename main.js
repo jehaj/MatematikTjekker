@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu, nativeTheme } = require('electron');
 const Store = require('electron-store');
 const store = new Store();
 const xlsxFile = require('read-excel-file/node');
@@ -24,8 +24,10 @@ function createWindow() {
 
     // check which page should be loaded
     // 
-    if (store.get('filePath') == null || store.get('folderPath') == null) {
+    if (store.get('filePath') == null || store.get('folderPath') == null ||
+        store.get('filePath') == ""   || store.get('folderPath') == "") {
         win.loadFile('startup.html');
+        store.set('isDarkMode', nativeTheme.shouldUseDarkColors);
 
     } else { win.loadFile('mattjek.html'); }
 };
