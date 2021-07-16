@@ -1,5 +1,7 @@
 # MatematikTjekker
 
+![Billede af programmet](https://github.com/NikolajK-HTX/MatematikTjekker/blob/af1cea513c0292ad1c0031ca5a852276ac3499e2/Billede%20af%20MatematikTjekker.png)
+
 ## Installation
 Hent den seneste udgivelse [her](https://github.com/NikolajK-HTX/MatematikTjekker/releases) og installer programmet.
 
